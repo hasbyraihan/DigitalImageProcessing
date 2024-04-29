@@ -1,185 +1,232 @@
 {% extends "layout.html" %} {% block body %}
-<div class="jumbotron jumbotron-fluid text-center">
-    <h1 class="display-1">Menu</h1>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Umum</h2>
-                <div class="d-flex flex-wrap">
+
+
+<html lang="en">
+<head>
+    <title>Sidebar 02</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                    <i class="fa fa-bars"></i>
+                    <span class="sr-only">Toggle Menu</span>
+                </button>
+            </div>
+            <div class="p-4 pt-5">
+                <h1><a href="#" class="logo" style="font-size: 24px;">Pengolahan Citra Digital</a></h1>
+                <ul class="list-unstyled components mb-5">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">UMUM</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <div class="p-2 flex-fill">
+                                    <form id="" action="{{ url_for('normal') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Normal</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('grayscale') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Grayscale</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('zoomin') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Zoom In</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('zoomout') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Zoom Out</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pergeseran</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu1">
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('move_left') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Geser Kiri</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('move_right') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Geser Kanan</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('move_up') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Geser Atas</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('move_down') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Geser Bawah</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Penerangan</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu2">
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('brightness_multiplication') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Terang (*)</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('brightness_division') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Gelap (/)</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('brightness_addition') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Terang (+)</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('brightness_substraction') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Gelap (-)</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Analisis Gambar</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu3">
+                            <li>
+                                <form id="" action="{{ url_for('histogram_rgb') }}" method="POST" enctype="multipart/form-data">
+                                    <button type="submit" class="btn btn-primary">Histogram</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pemrosesan Gambar</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu4">
+                            <li>
+                                <form id="" action="{{ url_for('histogram_equalizer') }}" method="POST" enctype="multipart/form-data">
+                                    <button type="submit" class="btn btn-primary">Histogram Equalizer</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </li>
                     
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('normal') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Normal</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('grayscale') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Grayscale</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('zoomin') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Zoom In</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('zoomout') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Zoom Out</button>
-                        </form>
-                    </div>
-                </div>
+                    <li>
+                        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Filter Gambar</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu5">
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('edge_detection') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Edge Detection</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('blur') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Blur</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Sharpening</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#pageSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Segmentation</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu6">
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('thresholding') }}" method="POST" enctype="multipart/form-data">
+                                        <li>
+											<a href="">Batas Bawah</a>
+											<input type="number" name="lower_thres" placeholder="0-255">
+										</li>
+										<li>
+											<a href="">Batas Bawah</a>
+											<input type="number" name="upper_thres" placeholder="0-255">
+										</li>
+										<li>
+											<button type="submit" class="btn btn-primary">Thresholding</button>
+										</li>
+										
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
-            <div class="col-md-4">
-                <h2>Pergeseran</h2>
-                <div class="d-flex flex-wrap">
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('move_left') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Geser Kiri</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('move_right') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Geser Kanan</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('move_up') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Geser Atas</button>
-                        </form>
-                    </div>
-                    <div class="p-2 flex-fill bd-highlight">
-                        <form id="" action="{{ url_for('move_down') }}" method="POST" enctype="multipart/form-data">
-                            <button type="submit" class="btn btn-primary">Geser Bawah</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h2>Penerangan</h2>
-                <div class="d-flex flex-wrap">
-                    <div class="p-2 flex-fill bd-highlight">
-                        <div class="p-2 flex-fill bd-highlight">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <td>
-                                            <form id="" action="{{ url_for('brightness_multiplication') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                <button type="submit" class="btn btn-primary">Terang (*)</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form id="" action="{{ url_for('brightness_division') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                <button type="submit" class="btn btn-primary">Gelap (/)</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <form id="" action="{{ url_for('brightness_addition') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                <button type="submit" class="btn btn-primary">Terang (+)</button>
-                                            </form>
-                                        </td>
-                                        <td>
-                                            <form id="" action="{{ url_for('brightness_substraction') }}" method="POST"
-                                                enctype="multipart/form-data">
-                                                <button type="submit" class="btn btn-primary">Gelap (-)</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                </thead>
-                            </table>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content" class="p-4 p-md-5 pt-5">
+            
+            <div class="container-fluid">
+                <div class="jumbotron jumbotron-fluid">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h3>Before</h3>
+                                <img class="img" src="static/img/img_normal.jpg" alt="image here">
+
+                                <h3>After</h3>
+                                <img class="img" src="{{ url_for('static', filename=file_path) }}" alt="image here">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
-                <h2>Analisis Gambar</h2>
-                <div class="p-2 flex-fill bd-highlight">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <form id="" action="{{ url_for('histogram_rgb') }}" method="POST" enctype="multipart/form-data">
-                                    <button type="submit" class="btn btn-primary">Histogram</button>
-                                </form>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h2>Pemrosesan Gambar</h2>
-                <div class="p-2 flex-fill bd-highlight">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <form id="" action="{{ url_for('histogram_equalizer') }}" method="POST" enctype="multipart/form-data">
-                                    <button type="submit" class="btn btn-primary">Histogram Equalizer</button>
-                                </form>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h2>Filter Gambar</h2>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('edge_detection') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Edge Detection</button>
-                    </form>
-                </div>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('blur') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Blur</button>
-                    </form>
-                </div>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('sharpening') }}" method="POST" enctype="multipart/form-data">
-                        <button type="submit" class="btn btn-primary">Sharpening</button>
-                    </form>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <h2>Segmentation</h2>
-                <div class="p-2 flex-fill bd-highlight">
-                    <form id="" action="{{ url_for('thresholding') }}" method="POST" enctype="multipart/form-data">
-                        <table class="table table-sm">
-                            <thead>
-                                <tr>
-                                    <th>Batas Bawah</th>
-                                    <th>Batas Atas</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><input type="number" name="lower_thres" placeholder="0-255"></td>
-                                    <td><input type="number" name="upper_thres" placeholder="0-255"></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"><button type="submit" class="btn btn-primary">Thresholding</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
-    <div class="container-fluid">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h3>After</h3>
-                        <img class="img-fluid" src="{{ url_for('static', filename=file_path) }}" alt="image here">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<style>
-</style>
+
+    <script src="static/js/jquery.min.js"></script>
+    <script src="static/js/popper.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/main.js"></script>
+</body>
+</html>
+
+
 {% endblock %}
