@@ -211,63 +211,47 @@
                                     </form>
                                 </div>
                             </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#pageSubmenu7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operasi Tambahan</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu7">
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object</button>
+                                    <form id="" action="{{ url_for('hitungKaca') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Kaca</button>
                                     </form>
                                 </div>
                             </li>
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count1Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 1 erode</button>
+                                    <form id="" action="{{ url_for('hitungPutih') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Putih</button>
                                     </form>
                                 </div>
                             </li>
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count2Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 2 erode</button>
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count3Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 3 erode</button>
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count4Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 4 erode</button>
+                                    <form id="" action="{{ url_for('closing') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Kotak Putih</button>
                                     </form>
                                 </div>
                             </li>
                         </ul>
                     </li>
 
-                    
                     <li>
                         <a href="#pageSubmenu8" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Segmentation</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu8">
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">
                                     <form id="" action="{{ url_for('thresholding') }}" method="POST" enctype="multipart/form-data">
-                                        <li>
-											<a href="">Batas Bawah</a>
-											<input type="number" name="lower_thres" placeholder="0-255">
-										</li>
-										<li>
-											<a href="">Batas Bawah</a>
-											<input type="number" name="upper_thres" placeholder="0-255">
-										</li>
-										<li>
-											<button type="submit" class="btn btn-primary">Thresholding</button>
-										</li>
-										
+                                        <label for="lower_thres">Batas Bawah</label>
+                                        <input type="number" id="lower_thres" name="lower_thres" placeholder="0-255">
+                                        <label for="upper_thres">Batas Atas</label>
+                                        <input type="number" id="upper_thres" name="upper_thres" placeholder="0-255">
+                                        <button type="submit" class="btn btn-primary">Thresholding</button>
                                     </form>
                                 </div>
                             </li>
@@ -279,25 +263,15 @@
 
         <!-- Page Content  -->
         <div id="content" class="p-4 p-md-5 pt-5">
+            
             <div class="container-fluid">
                 <div class="jumbotron jumbotron-fluid">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-4">
-                                <h3>Image RGB</h3>
-                                <img class="img-fluid" src="{{ url_for('static', filename='img/img_now.jpg') }}" alt="image here">
-                            </div>
-                            <div class="col-md-4">
-                                <h3>Red Histogram</h3>
-                                <img class="img-fluid" src="{{ url_for('static', filename='img/red_histogram.jpg') }}" alt="red histogram">
-                            </div>
-                            <div class="col-md-4">
-                                <h3>Green Histogram</h3>
-                                <img class="img-fluid" src="{{ url_for('static', filename='img/green_histogram.jpg') }}" alt="green histogram">
-                            </div>
-                            <div class="col-md-4">
-                                <h3>Blue Histogram</h3>
-                                <img class="img-fluid" src="{{ url_for('static', filename='img/blue_histogram.jpg') }}" alt="blue histogram">
+                            <div class="col-lg-12">
+                                <h3>{{ judul }}</h3>
+                                <img class="img" src="{{ url_for('static', filename=file_path) }}" alt="image here">
+                                <p>Hasil: {{ hasil }}</p>
                             </div>
                         </div>
                     </div>

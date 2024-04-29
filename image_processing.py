@@ -235,7 +235,7 @@ def brightness_division():
 
 def convolution(img, kernel):
     h_img, w_img, _ = img.shape
-    out = np.zeros((h_img-2, w_img-2), dtype=np.float)
+    out = np.zeros((h_img-2, w_img-2), dtype=float)
     new_img = np.zeros((h_img-2, w_img-2, 3))
     if np.array_equal((img[:, :, 1], img[:, :, 0]), img[:, :, 2]) == True:
         array = img[:, :, 0]
@@ -261,7 +261,7 @@ def convolution(img, kernel):
 
 def edge_detection():
     img = Image.open("static/img/img_now.jpg")
-    img_arr = np.asarray(img, dtype=np.int)
+    img_arr = np.asarray(img, dtype=float)
     kernel = np.array([[-1, -1, -1], [-1, 8, -1], [-1, -1, -1]])
     new_arr = convolution(img_arr, kernel)
     new_img = Image.fromarray(new_arr)
@@ -270,7 +270,7 @@ def edge_detection():
 
 def blur():
     img = Image.open("static/img/img_now.jpg")
-    img_arr = np.asarray(img, dtype=np.int)
+    img_arr = np.asarray(img, dtype=float) 
     kernel = np.array(
         [[0.0625, 0.125, 0.0625], [0.125, 0.25, 0.125], [0.0625, 0.125, 0.0625]])
     new_arr = convolution(img_arr, kernel)
@@ -280,7 +280,7 @@ def blur():
 
 def sharpening():
     img = Image.open("static/img/img_now.jpg")
-    img_arr = np.asarray(img, dtype=np.int)
+    img_arr = np.asarray(img, dtype=float)
     kernel = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
     new_arr = convolution(img_arr, kernel)
     new_img = Image.fromarray(new_arr)
@@ -339,14 +339,12 @@ def histogram_equalizer():
     image_equalized = np.interp(img, range(0, 256), my_cdf)
     cv2.imwrite('static/img/img_now.jpg', image_equalized)
 
-
 def threshold(lower_thres, upper_thres):
     img = Image.open("static/img/img_now.jpg")
-    img_arr = np.asarray(img)
+    img_arr = np.array(img)  
     condition = np.logical_and(np.greater_equal(img_arr, lower_thres),
                                np.less_equal(img_arr, upper_thres))
-    print(lower_thres, upper_thres)
-    img_arr.setflags(write=1)
+    img_arr = img_arr.copy()  
     img_arr[condition] = 255
     new_img = Image.fromarray(img_arr)
     new_img.save("static/img/img_now.jpg")

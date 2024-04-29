@@ -61,7 +61,9 @@ def upload():
             os.mkdir(target)
     for file in request.files.getlist("file"):
         file.save("static/img/img_now.jpg")
+           
     copyfile("static/img/img_now.jpg", "static/img/img_normal.jpg")
+    
     return render_template("uploaded.html", file_path="img/img_now.jpg")
 
 
@@ -230,6 +232,44 @@ def thresholding():
 @app.route("/count", methods=["POST"])
 @nocache
 def count():
+    jumlah_obj = image_processing.count_obj()
+    return render_template("uploaded.html", file_path="img/img_now.jpg", jumlah_obj=jumlah_obj)
+
+@app.route("/count1Erode", methods=["POST"])
+@nocache
+def count1Erode():
+    image_processing.erode()
+    
+    jumlah_obj = image_processing.count_obj()
+    return render_template("uploaded.html", file_path="img/img_now.jpg", jumlah_obj=jumlah_obj)
+
+@app.route("/count2Erode", methods=["POST"])
+@nocache
+def count2Erode():
+    image_processing.erode()
+    image_processing.erode()
+    
+    jumlah_obj = image_processing.count_obj()
+    return render_template("uploaded.html", file_path="img/img_now.jpg", jumlah_obj=jumlah_obj)
+
+@app.route("/count3Erode", methods=["POST"])
+@nocache
+def count3Erode():
+    image_processing.erode()
+    image_processing.erode()
+    image_processing.erode()
+    
+    jumlah_obj = image_processing.count_obj()
+    return render_template("uploaded.html", file_path="img/img_now.jpg", jumlah_obj=jumlah_obj)
+
+@app.route("/count4Erode", methods=["POST"])
+@nocache
+def count4Erode():
+    image_processing.erode()
+    image_processing.erode()
+    image_processing.erode()
+    image_processing.erode()
+    
     jumlah_obj = image_processing.count_obj()
     return render_template("uploaded.html", file_path="img/img_now.jpg", jumlah_obj=jumlah_obj)
 
