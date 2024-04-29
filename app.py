@@ -79,6 +79,24 @@ def grayscale():
     return render_template("uploaded.html", file_path="img/img_now.jpg")
 
 
+@app.route("/binarize", methods=["POST"])
+@nocache
+def binarize():
+    image_processing.binarize()
+    return render_template("uploaded.html", file_path="img/img_now_binary.jpg")
+
+@app.route("/dilate", methods=["POST"])
+@nocache
+def dilate():
+    image_processing.dilate()
+    return render_template("uploaded.html", file_path="img/img_now_binary.jpg")
+
+@app.route("/erode", methods=["POST"])
+@nocache
+def erode():
+    image_processing.erode()
+    return render_template("uploaded.html", file_path="img/img_now_binary.jpg")
+
 @app.route("/zoomin", methods=["POST"])
 @nocache
 def zoomin():

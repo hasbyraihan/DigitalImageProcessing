@@ -41,6 +41,13 @@
                             </li>
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('binarize') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Binary</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
                                     <form id="" action="{{ url_for('zoomin') }}" method="POST" enctype="multipart/form-data">
                                         <button type="submit" class="btn btn-primary">Zoom In</button>
                                     </form>
@@ -174,7 +181,27 @@
                     </li>
 
                     <li>
-                        <a href="#pageSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Segmentation</a>
+                        <a href="#pageSubmenu6" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operasi Morfologi</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu5">
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('dilate') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Dilasi</button>
+                                    </form>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('erode') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Erosi</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#pageSubmenu7" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Segmentation</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu6">
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">

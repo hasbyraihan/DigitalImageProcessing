@@ -29,6 +29,57 @@ def is_grey_scale(img_path):
                 return False
     return True
 
+def binarize(threshold=128):
+    img = Image.open("static/img/img_now.jpg").convert('L')  # Convert to grayscale
+    img_arr = np.asarray(img)
+    binary_arr = np.where(img_arr >= threshold, 255, 0)  # Apply threshold
+    new_img = Image.fromarray(binary_arr.astype('uint8'))
+    new_img.save("static/img/img_now_binary.jpg")
+
+def dilate():
+    img = Image.open("static/img/img_now.jpg").convert('L')  # Convert to grayscale
+    img_arr = np.array(img)
+    h, w = img_arr.shape
+
+    # Define the structuring element for dilation (3x3 square)
+    selem = np.ones((3, 3), dtype=np.uint8)
+
+    # Create an empty array to store the dilated image
+    dilated_arr = np.zeros((h, w), dtype=np.uint8)
+
+    # Perform dilation
+    for i in range(1, h - 1):
+        for j in range(1, w - 1):
+            # Dilate if any pixel in the neighborhood is non-zero
+            if np.any(img_arr[i - 1:i + 2, j - 1:j + 2] != 0):
+                dilated_arr[i, j] = 255
+
+    new_img = Image.fromarray(dilated_arr)
+    new_img.save("static/img/img_now_dilated.jpg")
+
+
+def erode():
+    img = Image.open("static/img/img_now.jpg").convert('L')  # Convert to grayscale
+    img_arr = np.array(img)
+    h, w = img_arr.shape
+
+    # Define the structuring element for erosion (3x3 square)
+    selem = np.ones((3, 3), dtype=np.uint8)
+
+    # Create an empty array to store the eroded image
+    eroded_arr = np.zeros((h, w), dtype=np.uint8)
+
+    # Perform erosion
+    for i in range(1, h - 1):
+        for j in range(1, w - 1):
+            # Erode if all pixels in the neighborhood are non-zero
+            if np.all(img_arr[i - 1:i + 2, j - 1:j + 2] != 0):
+                eroded_arr[i, j] = 255
+
+    new_img = Image.fromarray(eroded_arr)
+    new_img.save("static/img/img_now_eroded.jpg")
+
+
 
 def zoomin():
     img = Image.open("static/img/img_now.jpg")
