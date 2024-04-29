@@ -83,19 +83,33 @@ def grayscale():
 @nocache
 def binarize():
     image_processing.binarize()
-    return render_template("uploaded.html", file_path="img/img_now_binary.jpg")
+    return render_template("uploaded.html", file_path="img/img_now.jpg")
 
 @app.route("/dilate", methods=["POST"])
 @nocache
 def dilate():
     image_processing.dilate()
-    return render_template("uploaded.html", file_path="img/img_now_binary.jpg")
+    return render_template("uploaded.html", file_path="img/img_now.jpg")
 
 @app.route("/erode", methods=["POST"])
 @nocache
 def erode():
     image_processing.erode()
-    return render_template("uploaded.html", file_path="img/img_now_binary.jpg")
+    return render_template("uploaded.html", file_path="img/img_now.jpg")
+
+@app.route("/opening", methods=["POST"])
+@nocache
+def opening():
+    image_processing.erode()
+    image_processing.dilate()
+    return render_template("uploaded.html", file_path="img/img_now.jpg")
+
+@app.route("/closing", methods=["POST"])
+@nocache
+def closing():
+    image_processing.dilate()
+    image_processing.erode()
+    return render_template("uploaded.html", file_path="img/img_now.jpg")
 
 @app.route("/zoomin", methods=["POST"])
 @nocache

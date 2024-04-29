@@ -55,7 +55,7 @@ def dilate():
                 dilated_arr[i, j] = 255
 
     new_img = Image.fromarray(dilated_arr)
-    new_img.save("static/img/img_now_dilated.jpg")
+    new_img.save("static/img/img_now.jpg")
 
 
 def erode():
@@ -77,7 +77,7 @@ def erode():
                 eroded_arr[i, j] = 255
 
     new_img = Image.fromarray(eroded_arr)
-    new_img.save("static/img/img_now_eroded.jpg")
+    new_img.save("static/img/img_now.jpg")
 
 
 
