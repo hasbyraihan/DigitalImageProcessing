@@ -211,6 +211,13 @@
                                     </form>
                                 </div>
                             </li>
+                            <li>
+                                <div class="p-2 flex-fill bd-highlight">
+                                    <form id="" action="{{ url_for('count') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Count object</button>
+                                    </form>
+                                </div>
+                            </li>
                         </ul>
                     </li>
 
@@ -253,6 +260,9 @@
                                 <img class="img" src="static/img/img_normal.jpg" alt="image here">
 
                                 <h3>After</h3>
+                                {% if jumlah_obj is defined %}
+                                    <p>Jumlah objek putih: {{ jumlah_obj }}</p>
+                                {% endif %}
                                 <img class="img" src="{{ url_for('static', filename=file_path) }}" alt="image here">
                             </div>
                         </div>

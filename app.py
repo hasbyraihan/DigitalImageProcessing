@@ -227,6 +227,11 @@ def thresholding():
     image_processing.threshold(lower_thres, upper_thres)
     return render_template("uploaded.html", file_path="img/img_now.jpg")
 
+@app.route("/count", methods=["POST"])
+@nocache
+def count():
+    jumlah_obj = image_processing.count_obj()
+    return render_template("uploaded.html", file_path="img/img_now.jpg", jumlah_obj=jumlah_obj)
 
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

@@ -80,7 +80,6 @@ def erode():
     new_img.save("static/img/img_now.jpg")
 
 
-
 def zoomin():
     img = Image.open("static/img/img_now.jpg")
     img = img.convert("RGB")
@@ -351,3 +350,19 @@ def threshold(lower_thres, upper_thres):
     img_arr[condition] = 255
     new_img = Image.fromarray(img_arr)
     new_img.save("static/img/img_now.jpg")
+
+def count_obj():
+    img = Image.open("static/img/img_now.jpg").convert('L')
+    img_arr = np.array(img)
+    img_arr_copy = np.copy(img_arr)
+    lower_white = np.array([200])
+    upper_white = np.array([255])
+    mask = cv2.inRange(img_arr, lower_white, upper_white)
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    jumlah_obj = len(contours)
+    result_image = cv2.cvtColor(img_arr_copy, cv2.COLOR_GRAY2BGR) 
+    cv2.drawContours(result_image, contours, -1, (0, 255, 0), 2)
+    new_img = Image.fromarray(result_image)
+    new_img.save("static/img/img_now.jpg")
+    
+    return jumlah_obj
