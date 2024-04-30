@@ -1,0 +1,30 @@
+===========================================
+=               hitung1.jpg               =
+===========================================
+Cara menghitung file gambar hitung1.jpg:
+1. Tekan Metode Morfologi pada side bar
+2. Pilih Count object
+
+
+===========================================
+=               hitung2.jpg               =
+===========================================
+Cara menghitung file gambar hitung2.jpg:
+1. Tekan Metode Morfologi pada side bar
+2. Pilih Count object 4 erode
+-------------------ATAU--------------------
+1. Tekan Metode Morfologi pada side bar
+2. Pilih Erosi sebanyak 4 kali
+3. Pilih Count object
+
+
+===========================================
+=               hitung4.png               =
+===========================================
+1. Tekan Metode Morfologi pada side bar
+2. Pilih Count object 1 erode
+-------------------ATAU--------------------
+Cara menghitung file gambar hitung4.png:
+1. Tekan Metode Morfologi pada side bar
+2. Pilih Erosi
+3. Pilih Count object
