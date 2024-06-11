@@ -273,5 +273,22 @@ def count4Erode():
     jumlah_obj = image_processing.count_obj()
     return render_template("uploaded.html", file_path="img/img_now.jpg", jumlah_obj=jumlah_obj)
 
+@app.route("/count_obj_method2", methods=["POST"])
+def count_obj_method2():
+    if request.method == "POST":
+        image_processing.count_obj_method2()
+        success= "Data berhasil disimpan"
+        return render_template("uploaded.html", file_path="img/img_now.jpg", success=success)
+    else:
+        success = "Data tidak berhasil disimpan"
+        return render_template("uploaded.html", file_path="img/img_now.jpg", success=success)
+
+@app.route('/match', methods=['POST'])
+def match():
+    if request.method == 'POST':
+        match = image_processing.match_array_with_env()
+        return render_template('uploaded.html', file_path="img/img_now.jpg", match=match)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0")

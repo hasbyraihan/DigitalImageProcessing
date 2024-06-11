@@ -5,7 +5,16 @@ import math
 from collections import Counter
 from pylab import savefig
 import cv2
+import os
+import json
+from dotenv import dotenv_values
+from dotenv import load_dotenv
+import Levenshtein
+from sklearn.cluster import DBSCAN
+load_dotenv()
 
+# Load environment variables from .env file
+config = dotenv_values(".env")
 
 def grayscale():
     img = Image.open("static/img/img_now.jpg")
@@ -364,3 +373,173 @@ def count_obj():
     new_img.save("static/img/img_now.jpg")
     
     return jumlah_obj
+    
+def thinning(image):
+    img_arr = np.array(image)  # Konversi gambar menjadi array numpy
+    size = np.size(img_arr)
+    skel = np.zeros(img_arr.shape, np.uint8)
+
+    ret, img = cv2.threshold(img_arr, 127, 255, cv2.THRESH_BINARY_INV)  # Gunakan cv2.THRESH_BINARY_INV
+    element = cv2.getStructuringElement(cv2.MORPH_CROSS, (3, 3))
+    done = False
+
+    while not done:
+        eroded = cv2.erode(img, element)
+        temp = cv2.dilate(eroded, element)
+        temp = cv2.subtract(img, temp)
+        skel = cv2.bitwise_or(skel, temp)
+        img = eroded.copy()
+
+        zeros = size - cv2.countNonZero(img)
+        if zeros == size:
+            done = True
+
+    return skel
+
+def get_freeman_chain_code_from_image(image):
+    chain_code = []
+    points = np.transpose(np.nonzero(image))
+    directions = {
+        (0, 1): 0,  # Arah 0
+        (1, 1): 1,  # Arah 1
+        (1, 0): 2,  # Arah 2
+        (1, -1): 3,  # Arah 3
+        (0, -1): 4,  # Arah 4
+        (-1, -1): 5,  # Arah 5
+        (-1, 0): 6,  # Arah 6
+        (-1, 1): 7  # Arah 7
+    }
+
+    for i in range(1, len(points)):
+        dx = points[i][1] - points[i - 1][1]
+        dy = points[i][0] - points[i - 1][0]
+
+        # Tentukan arah Freeman menggunakan lookup table
+        direction = directions.get((dx, dy), None)
+        if direction is not None:
+            chain_code.append(direction)
+
+    return chain_code
+
+def count_obj_method2():
+    img = Image.open("static/img/img_now.jpg").convert('L')
+    img = img.resize((100, 100))
+    img = thinning(img)
+    img = Image.fromarray(img)
+    img.save("static/img/img_now.jpg")
+    chain_code = get_freeman_chain_code_from_image(img)
+    
+    # Menggunakan tanda kutip tunggal di awal dan di akhir string
+    fcc_str = "'" + ",".join(map(str, chain_code)) + "'"
+
+    # Simpan hasil Freeman Chain Code ke dalam file .env
+    with open(".env", 'r') as f:
+        env_lines = f.readlines()
+
+    # Cari key yang sesuai untuk menyimpan string
+    empty_key_index = None
+    for i, line in enumerate(env_lines):
+        if line.startswith(f"FCC_{i}="):
+            if not line.strip().endswith('='):
+                continue
+            empty_key_index = i
+            break
+
+    if empty_key_index is None:
+        empty_key_index = len(env_lines)
+
+    # Simpan string Freeman Chain Code ke file .env dengan ' sebagai pemisah
+    if empty_key_index >= len(env_lines):
+        env_lines.append(f"FCC_{empty_key_index}={fcc_str}\n")
+    else:
+        env_lines[empty_key_index] = f"FCC_{empty_key_index}={fcc_str}\n"
+
+    with open(".env", 'w') as f:
+        f.writelines(env_lines)
+
+    return fcc_str
+def match_array_with_env():
+    img = Image.open("static/img/img_now.jpg").convert('L')
+    img = img.resize((100, 100))
+    img = thinning(img)
+    img = Image.fromarray(img)
+    img.save("static/img/img_now.jpg")
+
+    # Ubah hasil thinning menjadi Freeman Chain Code
+    chain_code = get_freeman_chain_code_from_image(img)
+    fcc_str = "'" + ",".join(map(str, chain_code)) + "'"  # Tambahkan tanda kutip di awal dan akhir
+
+    # Baca setiap baris dari file .env
+    with open(".env", 'r') as f:
+        env_lines = f.readlines()
+
+    # Fungsi untuk memisahkan string yang diapit oleh tanda kutip tunggal
+    def split_by_quotes(s):
+        parts = s.split("'")
+        return [part for part in parts if part]
+
+    # Inisialisasi variabel untuk menyimpan hasil pencocokan dan indeks baris
+    matched_indices = []
+    result_str = ""
+    line = "1"
+    
+    for i, line1 in enumerate(env_lines):
+        if line1.startswith("FCC_") and "=" in line1:
+            stored_fcc_str = line1.strip().split('=', 1)[1]
+            stored_fcc_sections = split_by_quotes(stored_fcc_str)
+
+            distance = Levenshtein.distance(fcc_str, stored_fcc_str)
+            
+            if distance == 0:  # Jika Freeman Chain Code cocok
+                matched_indices.append(i)
+                result_str += str(i)
+                line = i+1
+                break  # Hentikan pencarian setelah menemukan emoji yang cocok
+            
+
+    emoji_dict = {
+        '0': 'Blush',
+        '1': 'Disappointed relieved',
+        '2': 'Expressionless',
+        '3': 'Face with raised eyebrow',
+        '4': 'Face with rolling eyes',
+        '5': 'Grin',
+        '6': 'Grinning',
+        '7': 'Heart eyes',
+        '8': 'Hugging face',
+        '9': 'Hushed',
+        '10': 'Joy',
+        '11': 'Kissing',
+        '12': 'Kissing closed eyes',
+        '13': 'Kissing heart',
+        '14': 'Kissing smiling eyes',
+        '15': 'Laughing',
+        '16': 'Neutral face',
+        '17': 'No mouth',
+        '18': 'Open mouth',
+        '19': 'Persevere',
+        '20': 'Relaxed',
+        '21': 'Rolling on the floor laughing',
+        '22': 'Sleeping',
+        '23': 'Sleepy',
+        '24': 'Slightly smiling face',
+        '25': 'Smile',
+        '26': 'Smiley',
+        '27': 'Smirk',
+        '28': 'Star-struck',
+        '29': 'Sunglasses',
+        '30': 'Sweat smile',
+        '31': 'Thinking face',
+        '32': 'Tired face',
+        '33': 'Wink',
+        '34': 'Yum',
+        '35': 'Zipper mouth face'
+    }
+
+    if result_str in emoji_dict:
+        emoji_name = emoji_dict[result_str]
+        return f"Emoji yang cocok ditemukan: '{emoji_name}' berdasarkan line {line} pada .env"
+    else:
+        return "Tidak ada emoji yang cocok ditemukan."
+
+# Fungsi split_by_quotes tidak diperlukan karena tidak ada pembagian section

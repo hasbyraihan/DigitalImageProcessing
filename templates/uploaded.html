@@ -220,29 +220,15 @@
                             </li>
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count1Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 1 erode</button>
+                                    <form id="" action="{{ url_for('count_obj_method2') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Method 2</button>
                                     </form>
                                 </div>
                             </li>
                             <li>
                                 <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count2Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 2 erode</button>
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count3Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 3 erode</button>
-                                    </form>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="p-2 flex-fill bd-highlight">
-                                    <form id="" action="{{ url_for('count4Erode') }}" method="POST" enctype="multipart/form-data">
-                                        <button type="submit" class="btn btn-primary">Count object 4 erode</button>
+                                    <form id="" action="{{ url_for('match') }}" method="POST" enctype="multipart/form-data">
+                                        <button type="submit" class="btn btn-primary">Check 2</button>
                                     </form>
                                 </div>
                             </li>
@@ -290,6 +276,12 @@
                                 <h3>After</h3>
                                 {% if jumlah_obj is defined %}
                                     <p>Jumlah objek putih: {{ jumlah_obj }}</p>
+                                {% endif %}
+                                {% if match is defined %}
+                                    <p>{{ match }}</p>
+                                {% endif %}
+                                {% if success_digit is defined %}
+                                    <p>Status simpan: {{ success_digit }}</p>
                                 {% endif %}
                                 <img class="img" src="{{ url_for('static', filename=file_path) }}" alt="image here">
                             </div>
